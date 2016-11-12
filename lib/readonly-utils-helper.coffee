@@ -3,22 +3,27 @@ module.exports =
 
 class ReadOnlyUtilHelper
   @isReadOnly: (filepath) ->
-    fs= require 'fs'
-    modeToPermissions = require 'mode-to-permissions'
-    stats = fs.statSync(filepath)
+    if filepath
+      fs= require 'fs'
+      modeToPermissions = require 'mode-to-permissions'
+      stats = fs.statSync(filepath)
 
-    modes = modeToPermissions(stats.mode)
-    ro = !modes.write.owner
-    return ro
+      modes = modeToPermissions(stats.mode)
+      ro = !modes.write.owner
+      return ro
+    else
+      return false
 
   @makeWritable: (filepath) ->
-    chmod = require 'chmod'
-    chmod(filepath, {write: true})
+    if filepath
+      chmod = require 'chmod'
+      chmod(filepath, {write: true})
 
 
   @makeReadonly: (filepath) ->
-    chmod = require 'chmod'
-    chmod(filepath, {write: false})
+    if filepath
+      chmod = require 'chmod'
+      chmod(filepath, {write: false})
 
   @toggleWriteable: (filepath) ->
     if @isReadOnly(filepath)
