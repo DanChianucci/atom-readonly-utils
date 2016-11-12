@@ -2,9 +2,9 @@
   "name": "readonly-utils",
   "main": "./lib/readonly-utils",
   "version": "0.0.0",
-  "description": "A short description of your package",
+  "description": "Adds convenience utilities for working with readonly files",
   "keywords": [],
-  "repository": "https://github.com/atom/readonly-utils",
+  "repository": "https://github.com/DanChianucci/atom-readonly-utils",
   "license": "MIT",
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
