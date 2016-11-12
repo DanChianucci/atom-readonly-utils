@@ -4,4 +4,4 @@
 - Colors the file tab to indicate a readonly file
 - Allows a read-only file to be overwritten (with confirmation)
 
-![Example](https://raw.githubusercontent.com/DanBChianucci/atom-readonly-utils/master/example.png)
+![Example](https://raw.githubusercontent.com/DanChianucci/atom-readonly-utils/master/example.png)
