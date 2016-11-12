@@ -1,0 +1,24 @@
+{
+  "name": "readonly-utils",
+  "main": "./lib/readonly-utils",
+  "version": "0.0.0",
+  "description": "A short description of your package",
+  "keywords": [],
+  "repository": "https://github.com/atom/readonly-utils",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "consumedServices": {
+    "status-bar": {
+      "versions": {
+        "^1.0.0": "consumeStatusBar"
+      }
+    }
+  },
+  "dependencies": {
+    "chmod": "^0.2.1",
+    "mode-to-permissions": "0.0.1",
+    "atom-space-pen-views": "^2.1.0"
+  }
+}
