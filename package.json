@@ -1,7 +1,7 @@
 {
   "name": "readonly-utils",
   "main": "./lib/readonly-utils",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "description": "Adds convenience utilities for working with readonly files",
   "keywords": [],
   "repository": "https://github.com/DanChianucci/atom-readonly-utils",
