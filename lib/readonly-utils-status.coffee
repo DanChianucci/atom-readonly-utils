@@ -30,6 +30,8 @@ class ReadOnlyToggleStatus extends View
     ReadOnlyUtilHelper = require './readonly-utils-helper'
     editor = atom.workspace.getActiveTextEditor()
     filepath = editor?.buffer?.file?.path
+    # console.log("Update "+filepath)
+
     if @displayInStatusBar and filepath
       ro = ReadOnlyUtilHelper.isReadOnly(filepath)
       @updateStatus(ro)
@@ -52,9 +54,12 @@ class ReadOnlyToggleStatus extends View
     pane = atom.workspace.getActivePane()
     view = atom.views.getView(pane)?.querySelectorAll(".tab.active")[0]?.querySelectorAll(".title")[0]
     if @colorizeTabs and ro
+      # console.log("Setting ")
       view?.classList?.add "ro"
     else
+      # console.log("Clearing ")
       view?.classList?.remove "ro"
+    # console.log(view)
 
   toggle: ->
     ReadOnlyUtilHelper = require './readonly-utils-helper'
@@ -75,7 +80,7 @@ class ReadOnlyToggleStatus extends View
   # Private: Sets up event handlers for indicator.
   handleEvents: ->
     @click => @toggle()
-    @subs.add atom.workspace.onDidStopChangingActivePaneItem          => @update()
+    @subs.add atom.workspace.onDidStopChangingActivePaneItem           => @update()
     @subs.add atom.config.observe 'readonly-utils.displayInStatusBar', => @updateConfig()
     @subs.add atom.config.observe 'readonly-utils.colorizeTabs',       => @updateConfig()
 

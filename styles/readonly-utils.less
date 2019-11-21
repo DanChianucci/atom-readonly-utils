@@ -3,10 +3,11 @@
 // See https://github.com/atom/atom-dark-ui/blob/master/styles/ui-variables.less
 // for a full listing of what's available.
 @import "ui-variables";
-
-
 &.ro {
-  color: @text-color-warning;
+  color: @text-color-error;
+  &.icon::before {
+    background-image: linear-gradient(45deg,  transparent 45%, @text-color-error 45%, @text-color-error 55%, transparent 55%);
+  }
 }
 
 &.rw {
