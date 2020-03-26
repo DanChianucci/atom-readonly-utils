@@ -4,6 +4,9 @@ class ReadOnlyToggle
     displayInStatusBar:
       type: 'boolean'
       default: true
+    displayInTab:
+      type: 'boolean'
+      default: true
     colorizeTabs:
       type: 'boolean'
       default: true
@@ -36,7 +39,7 @@ class ReadOnlyToggle
     console.log("Deactivate")
     @subs?.dispose()
     @subs = null
-    @dialog?.destroy()    
+    @dialog?.destroy()
     @dialog = null
     @status?.destroy()
     @status = null

@@ -4,6 +4,7 @@ module.exports =
 # Status bar indicator showing current tab settings.
 class ReadOnlyToggleStatus extends View
   displayInStatusBar: true
+  displayInTab: true
   colorizeTabs: true
   subs: null
   tile: null
@@ -53,13 +54,27 @@ class ReadOnlyToggleStatus extends View
   updateTabs: (ro) ->
     pane = atom.workspace.getActivePane()
     view = atom.views.getView(pane)?.querySelectorAll(".tab.active")[0]?.querySelectorAll(".title")[0]
-    if @colorizeTabs and ro
-      # console.log("Setting ")
-      view?.classList?.add "ro"
+    container = view?.querySelector "span.readonly-utils"
+
+    if ro
+      if @colorizeTabs
+        view?.classList.add "ro"
+      else
+        view?.classList.remove "ro"
+
+      if @displayInTab and not container?
+        container = document.createElement("span")
+        container.classList.add "readonly-utils"
+        container.innerHTML = " [RO]"
+        view?.appendChild container
+
+      if container? and not @displayInTab
+        view?.removeChild container
+
     else
-      # console.log("Clearing ")
-      view?.classList?.remove "ro"
-    # console.log(view)
+      view?.classList.remove "ro"
+      if container?
+        view?.removeChild container
 
   toggle: ->
     ReadOnlyUtilHelper = require './readonly-utils-helper'
@@ -80,12 +95,14 @@ class ReadOnlyToggleStatus extends View
   # Private: Sets up event handlers for indicator.
   handleEvents: ->
     @click => @toggle()
-    @subs.add atom.workspace.onDidStopChangingActivePaneItem           => @update()
+    @subs.add atom.workspace.onDidStopChangingActivePaneItem          => @update()
     @subs.add atom.config.observe 'readonly-utils.displayInStatusBar', => @updateConfig()
     @subs.add atom.config.observe 'readonly-utils.colorizeTabs',       => @updateConfig()
+    @subs.add atom.config.observe 'readonly-utils.displayInTab',       => @updateConfig()
 
   # Private: Updates cache of atom config settings for this package.
   updateConfig: ->
     @displayInStatusBar = atom.config.get 'readonly-utils.displayInStatusBar'
+    @displayInTab = atom.config.get 'readonly-utils.displayInTab'
     @colorizeTabs = atom.config.get 'readonly-utils.colorizeTabs'
     @update()
